@@ -27,7 +27,8 @@
         <activity android:name=".AndroidCameraApi">
             android:screenOrientation="portrait"
         </activity>
-        <activity android:name=".ResultsContainer"></activity>
+        <activity android:name=".ResultsContainer" />
+        <activity android:name=".SkinInformation"></activity>
     </application>
 
 </manifest>
