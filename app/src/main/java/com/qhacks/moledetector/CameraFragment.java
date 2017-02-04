@@ -1,4 +1,4 @@
-package io.alstonlin.hackprinceton;
+package com.qhacks.moledetector;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -24,7 +24,7 @@ public class CameraFragment extends Fragment {
         @Override
         public void onPictureTaken(byte[] data, Camera camera) {
             Bitmap image = BitmapFactory.decodeByteArray(data, 0, data.length);
-            DAO.getInstance().addFood(image, activity);
+            //DAO.getInstance().addFood(image, activity);
             camera.startPreview();
         }
     };
@@ -57,7 +57,7 @@ public class CameraFragment extends Fragment {
     public static CameraFragment newInstance(MainActivity activity) {
         CameraFragment fragment = new CameraFragment();
         Bundle args = new Bundle();
-        args.putSerializable(ARG_ACTIVITY, activity);
+       // args.putSerializable(ARG_ACTIVITY, activity);
         fragment.setArguments(args);
         fragment.activity = activity;
         return fragment;
@@ -79,7 +79,7 @@ public class CameraFragment extends Fragment {
         FrameLayout previewFrame = (FrameLayout) v.findViewById(R.id.camera_preview);
         previewFrame.addView(preview, 0);
         FloatingActionButton captureButton = (FloatingActionButton) v.findViewById(R.id.capture);
-        captureButton.setImageResource(R.drawable.track);
+       // captureButton.setImageResource(R.drawable.track);
         captureButton.setOnClickListener(
                 new View.OnClickListener() {
                     @Override

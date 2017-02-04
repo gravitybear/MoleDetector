@@ -1,4 +1,4 @@
-package io.alstonlin.hackprinceton;
+package com.qhacks.moledetector;
 
 import android.content.Context;
 import android.hardware.Camera;
