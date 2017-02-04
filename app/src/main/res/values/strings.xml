@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MoleDetector</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="sample_fact">Protect your skin, through thick and thin</string>
 </resources>
