@@ -35,6 +35,7 @@ import android.view.TextureView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -70,6 +71,7 @@ public class AndroidCameraApi extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Intent intent = getIntent();
         setContentView(R.layout.activity_camera_function);
         textureView = (TextureView) findViewById(R.id.texture);
         assert textureView != null;
@@ -143,6 +145,7 @@ public class AndroidCameraApi extends AppCompatActivity {
         }
     }
     protected void takePicture() {
+        System.out.println("taking pic");
         if(null == cameraDevice) {
             Log.e(TAG, "cameraDevice is null");
             return;
