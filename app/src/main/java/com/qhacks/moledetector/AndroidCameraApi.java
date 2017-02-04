@@ -6,6 +6,7 @@ package com.qhacks.moledetector;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.graphics.ImageFormat;
 import android.graphics.SurfaceTexture;
@@ -73,6 +74,8 @@ public class AndroidCameraApi extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //Intent intent = getIntent();
         setContentView(R.layout.activity_camera_function);
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
         textureView = (TextureView) findViewById(R.id.texture);
         assert textureView != null;
         textureView.setSurfaceTextureListener(textureListener);
