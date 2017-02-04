@@ -15,7 +15,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".camera_function"></activity>
+<<<<<<< HEAD
+        <activity android:name=".CameraFunction"></activity>
+=======
+        <activity android:name=".CameraFunction">
+            android:screenOrientation="portrait"
+        </activity>
+        <activity android:name=".AndroidCameraApi">
+            android:screenOrientation="portrait"
+        </activity>
+>>>>>>> origin/work2
     </application>
 
 </manifest>
