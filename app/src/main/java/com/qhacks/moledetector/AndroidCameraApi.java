@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.graphics.ImageFormat;
+import android.graphics.Rect;
 import android.graphics.SurfaceTexture;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCaptureSession;
@@ -79,7 +80,7 @@ public class AndroidCameraApi extends AppCompatActivity {
         textureView = (TextureView) findViewById(R.id.texture);
         assert textureView != null;
         textureView.setSurfaceTextureListener(textureListener);
-        takePictureButton = (Button) findViewById(R.id.btn_takepicture);
+        takePictureButton = (ImageView) findViewById(R.id.btn_takepicture);
         assert takePictureButton != null;
         takePictureButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,6 +149,7 @@ public class AndroidCameraApi extends AppCompatActivity {
         }
     }
     protected void takePicture() {
+
         System.out.println("taking pic");
         if(null == cameraDevice) {
             Log.e(TAG, "cameraDevice is null");
@@ -176,7 +178,7 @@ public class AndroidCameraApi extends AppCompatActivity {
             // Orientation
             int rotation = getWindowManager().getDefaultDisplay().getRotation();
             captureBuilder.set(CaptureRequest.JPEG_ORIENTATION, ORIENTATIONS.get(rotation));
-            final File file = new File(Environment.getExternalStorageDirectory()+"/pic.jpg");
+            final File file = new File(Environment.getExternalStorageDirectory()+"/Qu33N0Fh4x.jpg");
             ImageReader.OnImageAvailableListener readerListener = new ImageReader.OnImageAvailableListener() {
                 @Override
                 public void onImageAvailable(ImageReader reader) {
@@ -193,6 +195,7 @@ public class AndroidCameraApi extends AppCompatActivity {
                         e.printStackTrace();
                     } finally {
                         if (image != null) {
+                            image.setCropRect(new Rect());
                             image.close();
                         }
                     }
