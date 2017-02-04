@@ -12,10 +12,6 @@
     android:background="@color/colorPrimary"
     tools:context="com.qhacks.moledetector.MainActivity">
 
-<<<<<<< HEAD
-</RelativeLayout>
-=======
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -52,4 +48,4 @@
 
 
 </android.support.design.widget.CoordinatorLayout>
->>>>>>> refs/remotes/origin/work2
+
