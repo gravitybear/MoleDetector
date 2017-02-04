@@ -195,7 +195,7 @@ public class AndroidCameraApi extends AppCompatActivity {
                         e.printStackTrace();
                     } finally {
                         if (image != null) {
-                            image.setCropRect(new Rect());
+                            image.setCropRect(new Rect(20,80,310,320));
                             image.close();
                         }
                     }
