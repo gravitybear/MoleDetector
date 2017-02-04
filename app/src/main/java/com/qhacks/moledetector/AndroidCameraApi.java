@@ -8,7 +8,10 @@ import android.Manifest;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.ImageFormat;
+import android.graphics.Matrix;
 import android.graphics.Rect;
 import android.graphics.SurfaceTexture;
 import android.hardware.camera2.CameraAccessException;
@@ -177,17 +180,30 @@ public class AndroidCameraApi extends AppCompatActivity {
             // Orientation
             int rotation = getWindowManager().getDefaultDisplay().getRotation();
             captureBuilder.set(CaptureRequest.JPEG_ORIENTATION, ORIENTATIONS.get(rotation));
-            final File file = new File(Environment.getExternalStorageDirectory()+"/Qu33n0Fh4x.jpg");
+            final String TMP_FILE = Environment.getExternalStorageDirectory()+"/Download/Qu33n0Fh4x.jpg";
+            final String FILENAME = Environment.getExternalStorageDirectory()+"/Download/saved.png";
+            final File file = new File(TMP_FILE);
             ImageReader.OnImageAvailableListener readerListener = new ImageReader.OnImageAvailableListener() {
                 @Override
                 public void onImageAvailable(ImageReader reader) {
                     Image image = null;
                     try {
+                        // Save jpg to temp file
                         image = reader.acquireLatestImage();
                         ByteBuffer buffer = image.getPlanes()[0].getBuffer();
                         byte[] bytes = new byte[buffer.capacity()];
                         buffer.get(bytes);
                         save(bytes);
+                        // Load temp file
+                        final int CROP_HEIGHT = 600;
+                        Matrix matrix = new Matrix();
+                        matrix.setRotate(90);
+                        Bitmap bitmap = BitmapFactory.decodeFile(TMP_FILE);
+                        Bitmap resized = Bitmap.createBitmap(bitmap, 0, bitmap.getHeight() / 2 - CROP_HEIGHT / 2,
+                                bitmap.getWidth(), bitmap.getHeight() / 2 + CROP_HEIGHT / 2, matrix, true);
+                        FileOutputStream out = new FileOutputStream(FILENAME);
+                        resized.compress(Bitmap.CompressFormat.PNG, 100, out);
+                        out.flush();
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     } catch (IOException e) {
