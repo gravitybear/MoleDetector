@@ -35,5 +35,4 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:design:25.1.0'
     compile files('libs/commons-logging-1.2.2.jar')
-
 }
