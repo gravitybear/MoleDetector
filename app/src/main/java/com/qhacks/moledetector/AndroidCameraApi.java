@@ -256,11 +256,11 @@ public class AndroidCameraApi extends AppCompatActivity {
                         out.close();
                         tempBitmap = getResizedBitmap(resized,512);
                         final ImageView img = (ImageView) findViewById(R.id.img_preview_load);
-                        img.invalidate();
                         try {
                             AndroidCameraApi.this.runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
+                                    img.invalidate();
                                     img.setImageBitmap(resized);
                                 }
                             });
@@ -313,7 +313,6 @@ public class AndroidCameraApi extends AppCompatActivity {
                 @Override
                 public void onCaptureCompleted(CameraCaptureSession session, CaptureRequest request, TotalCaptureResult result) {
                     super.onCaptureCompleted(session, request, result);
-                    Toast.makeText(AndroidCameraApi.this, "Saved:" + file, Toast.LENGTH_SHORT).show();
                     //createCameraPreview();
                     sampleCameraPreview();
                 }
