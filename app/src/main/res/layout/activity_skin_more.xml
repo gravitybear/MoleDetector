@@ -49,7 +49,9 @@
                 android:text=" Tumours can come in different sizes and shapes and can be either Malignant or benign. They pose a danger either way they come into your life so try to take precautions when you need to."
                 android:textColor="?attr/actionModeSplitBackground"
                     android:padding="16dp"
-                    android:paddingLeft="20dp" />
+                    android:paddingLeft="20dp"
+                    android:clickable="false"
+                    android:editable="false" />
 
                 <FrameLayout
                     android:layout_width="200dp"

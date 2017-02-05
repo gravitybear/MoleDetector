@@ -57,9 +57,9 @@ public class SkinInformation extends AppCompatActivity {
         who_see.setText(doctor2);
 
         final ArrayList<ArcProgressStackView.Model> models = new ArrayList<>();
-        models.add(new ArcProgressStackView.Model("Jagedness", (int)(result.getJagedness() * 100), R.array.bg, R.array.medical_express));
-        models.add(new ArcProgressStackView.Model("Asymmetry", (int)(result.getAsymmetry() * 100), R.array.bg, R.array.medical_express));
-        models.add(new ArcProgressStackView.Model("Coloring", (int)(result.getColoring() * 100), R.array.bg, R.array.medical_express));
+        models.add(new ArcProgressStackView.Model("Jagedness", (int)(result.getJagedness() * 100), R.array.medical_express, R.array.devlight));
+        models.add(new ArcProgressStackView.Model("Asymmetry", (int)(result.getAsymmetry() * 100), R.array.medical_express, R.array.polluted_waves));
+        models.add(new ArcProgressStackView.Model("Coloring", (int)(result.getColoring() * 100), R.array.medical_express, R.array.medical_express));
 
         final ArcProgressStackView arcProgressStackView = (ArcProgressStackView) findViewById(R.id.arc);
         arcProgressStackView.setModels(models);
@@ -67,7 +67,7 @@ public class SkinInformation extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_results_container);
+        setContentView(R.layout.activity_skin_more);
 
         Intent intent = getIntent();
 
