@@ -192,11 +192,10 @@ public class AndroidCameraApi extends AppCompatActivity {
                         buffer.get(bytes);
                         save(bytes);
                         // Load temp file
-                        Matrix matrix = new Matrix();
-                        matrix.setRotate(90);
+                        int CROP_H = 225;
+                        int CROP_V = 600;
                         Bitmap bitmap = BitmapFactory.decodeFile(TMP_FILE);
-                        Bitmap resized = Bitmap.createBitmap(bitmap, 80, 200,
-                                bitmap.getWidth() - 120, bitmap.getHeight() - 500, matrix, true);
+                        Bitmap resized = Bitmap.createBitmap(bitmap, CROP_H, CROP_V, bitmap.getWidth() - CROP_H * 2, bitmap.getHeight() - CROP_V * 2);
                         FileOutputStream out = new FileOutputStream(FILENAME);
                         resized.compress(Bitmap.CompressFormat.PNG, 100, out);
                         out.flush();
