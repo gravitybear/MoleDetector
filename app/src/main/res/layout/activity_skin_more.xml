@@ -109,7 +109,7 @@
                         app:apsv_model_bg_enabled="true"
                         app:apsv_model_offset="-2dp"
                         app:apsv_preview_bg="#34ffa70b"
-                        app:apsv_preview_colors="@medical_express"
+                        app:apsv_preview_colors="@array/medical_express"
                         app:apsv_rounded="true"
                         app:apsv_shadowed="false"
                         app:apsv_text_color="#00000000"/>
