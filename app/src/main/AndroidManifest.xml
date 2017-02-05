@@ -28,7 +28,8 @@
             android:screenOrientation="portrait"
         </activity>
         <activity android:name=".ResultsContainer" />
-        <activity android:name=".SkinInformation"></activity>
+        <activity android:name=".SkinInformation" />
+        <activity android:name=".LoadingScreen"></activity>
     </application>
 
 </manifest>
