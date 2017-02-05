@@ -65,14 +65,11 @@ public class AndroidCameraApi extends AppCompatActivity {
     private String cameraId;
     protected CameraDevice cameraDevice;
     protected CameraCaptureSession cameraCaptureSessions;
-    protected CaptureRequest captureRequest;
     protected CaptureRequest.Builder captureRequestBuilder;
     private Size imageDimension;
     private ImageReader imageReader;
-    private File file;
     private static final int REQUEST_CAMERA_PERMISSION = 200;
-    private boolean mFlashSupported;
-    private Handler mBackgroundHandler;
+        private Handler mBackgroundHandler;
     private HandlerThread mBackgroundThread;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,7 +130,7 @@ public class AndroidCameraApi extends AppCompatActivity {
         @Override
         public void onCaptureCompleted(CameraCaptureSession session, CaptureRequest request, TotalCaptureResult result) {
             super.onCaptureCompleted(session, request, result);
-            Toast.makeText(AndroidCameraApi.this, "Saved:" + file, Toast.LENGTH_SHORT).show();
+            Toast.makeText(AndroidCameraApi.this, "Saved", Toast.LENGTH_SHORT).show();
             createCameraPreview();
         }
     };
@@ -172,23 +169,23 @@ public class AndroidCameraApi extends AppCompatActivity {
                 height = jpegSizes[0].getHeight();
             }
             ImageReader reader = ImageReader.newInstance(width, height, ImageFormat.JPEG, 1);
-            List<Surface> outputSurfaces = new ArrayList<Surface>(2);
+            List<Surface> outputSurfaces = new ArrayList<>(2);
             outputSurfaces.add(reader.getSurface());
-            outputSurfaces.add(new Surface(textureView.getSurfaceTexture()));
             final CaptureRequest.Builder captureBuilder = cameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_STILL_CAPTURE);
             captureBuilder.addTarget(reader.getSurface());
             captureBuilder.set(CaptureRequest.CONTROL_MODE, CameraMetadata.CONTROL_MODE_AUTO);
             // Orientation
             int rotation = getWindowManager().getDefaultDisplay().getRotation();
             captureBuilder.set(CaptureRequest.JPEG_ORIENTATION, ORIENTATIONS.get(rotation));
-            final String TMP_FILE = Environment.getExternalStorageDirectory()+"/Download/Qu33n0Fh4x.jpg";
-            final String FILENAME = Environment.getExternalStorageDirectory()+"/Download/saved.png";
+            final String TMP_FILE = Environment.getExternalStorageDirectory() + "/Download/Qu33n0Fh4x.jpg";
+            final String FILENAME = Environment.getExternalStorageDirectory() + "/Download/saved.png";
             final File file = new File(TMP_FILE);
             ImageReader.OnImageAvailableListener readerListener = new ImageReader.OnImageAvailableListener() {
                 @Override
                 public void onImageAvailable(ImageReader reader) {
                     Image image = null;
                     try {
+                        // TODO: Create loading screen
                         // Save jpg to temp file
                         image = reader.acquireLatestImage();
                         ByteBuffer buffer = image.getPlanes()[0].getBuffer();
@@ -196,19 +193,22 @@ public class AndroidCameraApi extends AppCompatActivity {
                         buffer.get(bytes);
                         save(bytes);
                         // Load temp file
-                        final int CROP_HEIGHT = 600;
                         Matrix matrix = new Matrix();
                         matrix.setRotate(90);
                         Bitmap bitmap = BitmapFactory.decodeFile(TMP_FILE);
-                        /*Bitmap resized = Bitmap.createBitmap(bitmap, 0, bitmap.getHeight() / 2 - CROP_HEIGHT / 2,
-                                bitmap.getWidth(), bitmap.getHeight() / 2 + CROP_HEIGHT / 2, matrix, true);*/
-
-                        Bitmap resized = Bitmap.createBitmap(bitmap, 80,200,
-                                bitmap.getWidth()-120, bitmap.getHeight()-500, matrix, true);
-
+                        Bitmap resized = Bitmap.createBitmap(bitmap, 80, 200,
+                                bitmap.getWidth() - 120, bitmap.getHeight() - 500, matrix, true);
                         FileOutputStream out = new FileOutputStream(FILENAME);
                         resized.compress(Bitmap.CompressFormat.PNG, 100, out);
                         out.flush();
+                        DAO.predictMole(FILENAME, new DAO.OnPredictListener() {
+                            @Override
+                            public void onPredict(PredictionResult result) {
+                                // TODO: Transition to appropriate results screen
+                                // TODO: Remove loading screen
+                                Log.d("CameraAPI", String.valueOf(result.getLikelihood()));
+                            }
+                        });
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     } catch (IOException e) {
@@ -254,6 +254,7 @@ public class AndroidCameraApi extends AppCompatActivity {
                 }
                 @Override
                 public void onConfigureFailed(CameraCaptureSession session) {
+                    Log.e("Camera", "FAILED!");
                 }
             }, mBackgroundHandler);
         } catch (CameraAccessException e) {
