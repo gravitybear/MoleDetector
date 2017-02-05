@@ -20,7 +20,7 @@
         android:weightSum="1">
 
         <TextView
-            android:text="@ id thingy"
+            android:text="thingy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/condition_title"
