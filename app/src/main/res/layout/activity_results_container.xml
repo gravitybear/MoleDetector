@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_results_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context="com.qhacks.moledetector.ResultsContainer">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@drawable/roof_shadow"
+
+        android:weightSum="3"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true">
+
+        <Button
+            android:id="@+id/go_camera"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="Camera"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            android:textColor="@color/colorPrimaryDark"
+            android:textColorHighlight="@color/colorPrimary"
+            android:background="@null"/>
+        <Button
+            android:id="@+id/show_results"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="Result"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            android:textColor="@color/colorPrimaryDark"
+            android:textColorHighlight="@color/colorPrimary"
+            android:background="@null"/>
+        <Button
+            android:id="@+id/show_info"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="More Info"
+            android:textSize="16sp"
+            android:textAllCaps="false"
+            android:textColor="@color/colorPrimaryDark"
+            android:textColorHighlight="@color/colorPrimary"
+            android:background="@null"/>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:weightSum="3"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true">
+    <View
+        android:id="@+id/myRectangleView"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:background="@drawable/selected_tab"/>
+    </LinearLayout>
+</RelativeLayout>
