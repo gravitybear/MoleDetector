@@ -55,6 +55,7 @@ import java.util.List;
 public class AndroidCameraApi extends AppCompatActivity {
     private static final String TAG = "AndroidCameraApi";
     private ImageView takePictureButton;
+    private Bitmap tempBitmap;
     private TextureView textureView;
     private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
     static {
@@ -95,6 +96,7 @@ public class AndroidCameraApi extends AppCompatActivity {
                 }
             }
         });
+
         ImageView backButton = (ImageView) findViewById(R.id.cam_back);
         if (backButton != null) {
             backButton.setOnClickListener(new View.OnClickListener() {
@@ -148,7 +150,8 @@ public class AndroidCameraApi extends AppCompatActivity {
         public void onCaptureCompleted(CameraCaptureSession session, CaptureRequest request, TotalCaptureResult result) {
             super.onCaptureCompleted(session, request, result);
             Toast.makeText(AndroidCameraApi.this, "Saved", Toast.LENGTH_SHORT).show();
-            createCameraPreview();
+            //createCameraPreview();
+            sampleCameraPreview();
         }
     };
     protected void startBackgroundThread() {
@@ -166,6 +169,22 @@ public class AndroidCameraApi extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+    public Bitmap getResizedBitmap(Bitmap image, int maxSize) {
+        int width = image.getWidth();
+        int height = image.getHeight();
+
+        float bitmapRatio = (float)width / (float) height;
+        if (bitmapRatio > 0) {
+            width = maxSize;
+            height = (int) (width / bitmapRatio);
+        } else {
+            height = maxSize;
+            width = (int) (height * bitmapRatio);
+        }
+        return Bitmap.createScaledBitmap(image, width, height, true);
+    }
+
     protected void takePicture() {
         System.out.println("taking pic");
         if(null == cameraDevice) {
@@ -179,6 +198,8 @@ public class AndroidCameraApi extends AppCompatActivity {
         LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View layout = inflater.inflate(R.layout.activity_loading_screen, null);
         mainLayout.addView(layout);
+        ImageView img = (ImageView) findViewById(R.id.img_preview_load);
+        //img.setImageResource(0);
         ViewGroup.LayoutParams params = layout.getLayoutParams();
         if (params != null) {
             params.width = ViewGroup.LayoutParams.MATCH_PARENT;
@@ -219,6 +240,7 @@ public class AndroidCameraApi extends AppCompatActivity {
                     try {
                         // Save jpg to temp file
                         image = reader.acquireLatestImage();
+
                         ByteBuffer buffer = image.getPlanes()[0].getBuffer();
                         byte[] bytes = new byte[buffer.capacity()];
                         buffer.get(bytes);
@@ -227,10 +249,25 @@ public class AndroidCameraApi extends AppCompatActivity {
                         int CROP_H = 225;
                         int CROP_V = 600;
                         Bitmap bitmap = BitmapFactory.decodeFile(TMP_FILE);
-                        Bitmap resized = Bitmap.createBitmap(bitmap, CROP_H, CROP_V, bitmap.getWidth() - CROP_H * 2, bitmap.getHeight() - CROP_V * 2);
+                        final Bitmap resized = Bitmap.createBitmap(bitmap, CROP_H, CROP_V, bitmap.getWidth() - CROP_H * 2, bitmap.getHeight() - CROP_V * 2);
                         FileOutputStream out = new FileOutputStream(FILENAME);
                         resized.compress(Bitmap.CompressFormat.PNG, 100, out);
                         out.flush();
+                        out.close();
+                        tempBitmap = getResizedBitmap(resized,512);
+                        final ImageView img = (ImageView) findViewById(R.id.img_preview_load);
+                        img.invalidate();
+                        try {
+                            AndroidCameraApi.this.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    img.setImageBitmap(resized);
+                                }
+                            });
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
                         DAO.predictMole(FILENAME, new DAO.OnPredictListener() {
                             @Override
                             public void onPredict(PredictionResult result) {
@@ -239,6 +276,8 @@ public class AndroidCameraApi extends AppCompatActivity {
                                 mainLayout.removeAllViews();
                                 Log.d("CameraAPI", String.valueOf(result.getLikelihood()));
                                 Intent intent = new Intent(AndroidCameraApi.this, SkinInformation.class);
+                                SkinInformation.data = resized;
+                                SkinInformation.result = result;
                                 startActivity(intent);
                             }
 
@@ -275,7 +314,8 @@ public class AndroidCameraApi extends AppCompatActivity {
                 public void onCaptureCompleted(CameraCaptureSession session, CaptureRequest request, TotalCaptureResult result) {
                     super.onCaptureCompleted(session, request, result);
                     Toast.makeText(AndroidCameraApi.this, "Saved:" + file, Toast.LENGTH_SHORT).show();
-                    createCameraPreview();
+                    //createCameraPreview();
+                    sampleCameraPreview();
                 }
             };
             cameraDevice.createCaptureSession(outputSurfaces, new CameraCaptureSession.StateCallback() {
@@ -323,6 +363,34 @@ public class AndroidCameraApi extends AppCompatActivity {
         } catch (CameraAccessException e) {
             e.printStackTrace();
         }
+    }
+    protected void sampleCameraPreview() {
+        /*try {
+            SurfaceTexture texture = textureView.getSurfaceTexture();
+            assert texture != null;
+            texture.setDefaultBufferSize(imageDimension.getWidth(), imageDimension.getHeight());
+            Surface surface = new Surface(texture);
+            captureRequestBuilder = cameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW);
+            captureRequestBuilder.addTarget(surface);
+            cameraDevice.createCaptureSession(Arrays.asList(surface), new CameraCaptureSession.StateCallback(){
+                @Override
+                public void onConfigured(@NonNull CameraCaptureSession cameraCaptureSession) {
+                    //The camera is already closed
+                    if (null == cameraDevice) {
+                        return;
+                    }
+                    // When the session is ready, we start displaying the preview.
+                    cameraCaptureSessions = cameraCaptureSession;
+                    updatePreview();
+                }
+                @Override
+                public void onConfigureFailed(@NonNull CameraCaptureSession cameraCaptureSession) {
+                    Toast.makeText(AndroidCameraApi.this, "Configuration change", Toast.LENGTH_SHORT).show();
+                }
+            }, null);
+        } catch (CameraAccessException e) {
+            e.printStackTrace();
+        }*/
     }
     private void openCamera() {
         CameraManager manager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);

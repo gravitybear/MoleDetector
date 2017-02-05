@@ -22,4 +22,5 @@ public class LoadingScreen extends AppCompatActivity {
         avi_inner.show();
     }
 
+
 }
