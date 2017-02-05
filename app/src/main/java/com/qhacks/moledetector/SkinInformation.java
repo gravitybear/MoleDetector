@@ -34,33 +34,17 @@ public class SkinInformation extends AppCompatActivity {
 
     // fills textviews on first window you open after scanning
     void fillMainInfo() {
-        String diagnosis;
         String short_desc;
         String tip;
         String doctor1;
         String doctor2;
-        double likelihood = result.getLikelihood();
-        if (likelihood <= .1) {
-            diagnosis = "healthy";
-            short_desc = "Since our results are not 100% accurate, we still recommend seeing a physician every year for a professional skin exam";
-            tip = "Most skin related abnormalities are caused by exposure to ultra-violet sun rays";
-            doctor1 = "If you really think you have an issue";
-            doctor2 = "You should see your family doctor";
-        }else if (likelihood <= .5){
-            diagnosis = "benign";
-            short_desc = "Since our results are not 100% accurate, we still recommend seeing a physician every year for a professional skin exam";
-            tip = "wow";
-            doctor1 = "If you really think you have an issue";
-            doctor2 = "You should see your family doctor";
-        }else {
-            diagnosis = "malignant";
-            short_desc = "Since our results are not 100% accurate, we still recommend seeing a physician every year for a professional skin exam";
-            tip = "Most skin related abnormalities are caused by exposure to ultra-violet sun rays";
-            doctor1 = "If you really think you have an issue";
-            doctor2 = "You should see your family doctor";
-        }
+        int likelihood = (int) Math.round(result.getLikelihood() * 100);
+        short_desc = "Since our results are not 100% accurate, we still recommend seeing a physician every year for a professional skin exam";
+        tip = "Most skin related abnormalities are caused by exposure to ultra-violet sun rays";
+        doctor1 = "If you really think you have an issue";
+        doctor2 = "You should see your family doctor";
         TextView diagnosis_title = (TextView) findViewById(R.id.diagnosis_title);
-        diagnosis_title.setText(diagnosis);
+        diagnosis_title.setText(Integer.toString(likelihood) + "%");
         TextView diag_desc = (TextView) findViewById(R.id.diag_desc);
         diag_desc.setText(short_desc);
         TextView diag_tip = (TextView) findViewById(R.id.diag_tip);

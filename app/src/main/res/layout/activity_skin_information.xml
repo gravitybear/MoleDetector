@@ -19,40 +19,39 @@
         android:layout_width="match_parent">
         <ImageView
             android:id="@+id/img_skin_final"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleX="1.1"
             android:scaleY="1.1"
             android:scaleType="centerCrop" />
-            <LinearLayout
-                android:orientation="vertical"
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:paddingBottom="2dp"
+            android:background="#80000000">
+            <TextView
+                android:text="The likelihood of your mole being malignant is"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:paddingBottom="2dp"
-                android:background="#80000000">
+                android:textSize="24sp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:id="@+id/sub_diagnosis" />
 
-                <TextView
-                    android:text="Our analysis shows that this skin sample is"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="24sp"
-                    android:textColor="@color/white"
-                    android:textStyle="bold"
-                    android:gravity="center"
-                    android:id="@+id/sub_diagnosis" />
-
-                <TextView
-                    android:layout_marginTop="-7dp"
-                    android:id="@+id/diagnosis_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="36sp"
-                    android:textColor="@color/white"
-                    android:textStyle="bold"
-                    android:gravity="center"
-                    android:text="healthy" />
-            </LinearLayout>
+            <TextView
+                android:layout_marginTop="-7dp"
+                android:id="@+id/diagnosis_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="36sp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:text="healthy" />
+        </LinearLayout>
         </RelativeLayout>
 
     <View
