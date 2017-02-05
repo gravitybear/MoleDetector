@@ -199,8 +199,8 @@ public class AndroidCameraApi extends AppCompatActivity {
                         Matrix matrix = new Matrix();
                         matrix.setRotate(90);
                         Bitmap bitmap = BitmapFactory.decodeFile(TMP_FILE);
-                        Bitmap resized = Bitmap.createBitmap(bitmap, 0, bitmap.getHeight() / 2 - CROP_HEIGHT / 2,
-                                bitmap.getWidth(), bitmap.getHeight() / 2 + CROP_HEIGHT / 2, matrix, true);
+                        Bitmap resized = Bitmap.createBitmap(bitmap, 80, 200,
+                                bitmap.getWidth()-120, bitmap.getHeight()-500, matrix, true);
                         FileOutputStream out = new FileOutputStream(FILENAME);
                         resized.compress(Bitmap.CompressFormat.PNG, 100, out);
                         out.flush();
@@ -210,7 +210,6 @@ public class AndroidCameraApi extends AppCompatActivity {
                         e.printStackTrace();
                     } finally {
                         if (image != null) {
-                            image.setCropRect(new Rect(20,80,310,320));
                             image.close();
                         }
                     }
