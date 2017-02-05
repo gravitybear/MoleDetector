@@ -18,8 +18,11 @@ public class SkinInformation extends AppCompatActivity {
         goCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SkinInformation.this, AndroidCameraApi.class);
+                // go back to homepage
+                Intent intent = new Intent(SkinInformation.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
+                finish();
             }
         });
 
