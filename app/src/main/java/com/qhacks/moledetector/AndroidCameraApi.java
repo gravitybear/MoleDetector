@@ -6,13 +6,12 @@ package com.qhacks.moledetector;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.ImageFormat;
-import android.graphics.Matrix;
-import android.graphics.Rect;
 import android.graphics.SurfaceTexture;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCaptureSession;
@@ -35,10 +34,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.Size;
 import android.util.SparseIntArray;
+import android.view.LayoutInflater;
 import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import java.io.File;
@@ -61,7 +63,9 @@ public class AndroidCameraApi extends AppCompatActivity {
         ORIENTATIONS.append(Surface.ROTATION_180, 270);
         ORIENTATIONS.append(Surface.ROTATION_270, 180);
     }
+    private RelativeLayout mainLayout;
     private String cameraId;
+    private boolean camButtonEnabled;
     protected CameraDevice cameraDevice;
     protected CameraCaptureSession cameraCaptureSessions;
     protected CaptureRequest.Builder captureRequestBuilder;
@@ -73,10 +77,10 @@ public class AndroidCameraApi extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //Intent intent = getIntent();
         setContentView(R.layout.activity_camera_function);
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
+        camButtonEnabled = true;
         textureView = (TextureView) findViewById(R.id.texture);
         assert textureView != null;
         textureView.setSurfaceTextureListener(textureListener);
@@ -85,9 +89,23 @@ public class AndroidCameraApi extends AppCompatActivity {
         takePictureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                takePicture();
+                if (camButtonEnabled) {
+                    takePicture();
+                    camButtonEnabled = false;
+                }
             }
         });
+        ImageView backButton = (ImageView) findViewById(R.id.cam_back);
+        if (backButton != null) {
+            backButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (camButtonEnabled) {
+                        finish();
+                    }
+                }
+            });
+        }
     }
     TextureView.SurfaceTextureListener textureListener = new TextureView.SurfaceTextureListener() {
         @Override
@@ -154,6 +172,21 @@ public class AndroidCameraApi extends AppCompatActivity {
             Log.e(TAG, "cameraDevice is null");
             return;
         }
+        // TODO: Create loading screen
+        /*Intent intent = new Intent(AndroidCameraApi.this, LoadingScreen.class);
+        startActivity(intent);*/
+        mainLayout = (RelativeLayout) findViewById(R.id.activity_camera_function);
+        LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View layout = inflater.inflate(R.layout.activity_loading_screen, null);
+        mainLayout.addView(layout);
+        ViewGroup.LayoutParams params = layout.getLayoutParams();
+        if (params != null) {
+            params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+            params.height = ViewGroup.LayoutParams.MATCH_PARENT;
+            layout.setLayoutParams(params);
+        }
+
+
         CameraManager manager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
         try {
             CameraCharacteristics characteristics = manager.getCameraCharacteristics(cameraDevice.getId());
@@ -168,7 +201,7 @@ public class AndroidCameraApi extends AppCompatActivity {
                 height = jpegSizes[0].getHeight();
             }
             ImageReader reader = ImageReader.newInstance(width, height, ImageFormat.JPEG, 1);
-            List<Surface> outputSurfaces = new ArrayList<>(2);
+            List<Surface> outputSurfaces = new ArrayList<>(1);
             outputSurfaces.add(reader.getSurface());
             final CaptureRequest.Builder captureBuilder = cameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_STILL_CAPTURE);
             captureBuilder.addTarget(reader.getSurface());
@@ -184,7 +217,6 @@ public class AndroidCameraApi extends AppCompatActivity {
                 public void onImageAvailable(ImageReader reader) {
                     Image image = null;
                     try {
-                        // TODO: Create loading screen
                         // Save jpg to temp file
                         image = reader.acquireLatestImage();
                         ByteBuffer buffer = image.getPlanes()[0].getBuffer();
@@ -204,7 +236,10 @@ public class AndroidCameraApi extends AppCompatActivity {
                             public void onPredict(PredictionResult result) {
                                 // TODO: Transition to appropriate results screen
                                 // TODO: Remove loading screen
+                                mainLayout.removeAllViews();
                                 Log.d("CameraAPI", String.valueOf(result.getLikelihood()));
+                                Intent intent = new Intent(AndroidCameraApi.this, SkinInformation.class);
+                                startActivity(intent);
                             }
 
                             @Override

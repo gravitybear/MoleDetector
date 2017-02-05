@@ -26,7 +26,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
-            android:text="Camera"
+            android:text="Home"
             android:textAllCaps="false"
             android:textSize="16sp"
             android:textColor="@color/colorPrimaryDark"

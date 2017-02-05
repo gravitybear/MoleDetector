@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context="com.qhacks.moledetector.CameraFunction">
 
-
     <TextureView
         android:id="@+id/texture"
         android:layout_width="match_parent"
@@ -41,5 +40,22 @@
         android:layout_marginBottom="16dp"
         android:layout_marginTop="16dp"
         android:src="@drawable/ic_camera" />
+    <TextView
+        android:layout_width="300dp"
+        android:textSize="24sp"
+        android:layout_height="wrap_content"
+        android:text="Please point the camera at your skin"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="124dp"/>
 
+    <ImageView
+        android:id="@+id/cam_back"
+        android:layout_width="60dp"
+        android:layout_marginStart="4dp"
+        android:layout_height="60dp"
+        android:src="@drawable/ic_back"/>
 </RelativeLayout>
