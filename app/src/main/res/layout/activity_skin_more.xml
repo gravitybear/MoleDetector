@@ -20,7 +20,7 @@
         android:weightSum="1">
 
         <TextView
-            android:text="Melanoma"
+            android:text="More Information"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="40dp"
@@ -46,9 +46,10 @@
                 android:inputType="textMultiLine"
                 android:ems="10"
                 android:id="@+id/more_info_desc"
-                android:text="Melanoma, also known as malignant melanoma, is a type of cancer that develops from the pigment-containing cells known as melanocytes. Melanomas typically occur in the skin but may rarely occur in the mouth, intestines, or eye. In women they most commonly occur on the legs, while in men they are most common on the back. Sometimes they develop from a mole with concerning changes including an increase in size, irregular edges, change in color, itchiness, or skin breakdown."
+                android:text=" Tumours can come in different sizes and shapes and can be either Malignant or benign. They pose a danger either way they come into your life so try to take precautions when you need to."
                 android:textColor="?attr/actionModeSplitBackground"
-                    android:padding="16dp" />
+                    android:padding="16dp"
+                    android:paddingLeft="20dp" />
 
                 <FrameLayout
                     android:layout_width="200dp"
@@ -114,6 +115,15 @@
                         app:apsv_shadowed="false"
                         app:apsv_text_color="#00000000"/>
                 </FrameLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="This graph displays charachteristics of your skin determined through our scan "
+                    android:layout_gravity="center"
+                    android:textColor="@android:color/black"
+                    android:id="@+id/textView"
+                    android:paddingLeft="40dp" />
 
                 <LinearLayout
                     android:layout_marginTop="10dp"
