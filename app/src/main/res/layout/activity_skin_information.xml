@@ -79,6 +79,8 @@
                 android:id="@+id/arc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:foregroundGravity="center"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 app:apsv_rounded="true"
                 app:apsv_shadowed="true"
