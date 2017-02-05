@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <uses-feature android:name="android.hardware.camera2.full" />
 
@@ -28,7 +29,8 @@
             android:screenOrientation="portrait"
         </activity>
         <activity android:name=".ResultsContainer" />
-        <activity android:name=".SkinInformation"></activity>
+        <activity android:name=".SkinInformation" />
+        <activity android:name=".LoadingScreen"></activity>
     </application>
 
 </manifest>
