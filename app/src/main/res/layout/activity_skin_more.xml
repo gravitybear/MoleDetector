@@ -20,20 +20,21 @@
         android:weightSum="1">
 
         <TextView
-            android:text="thingy"
+            android:text="Melanoma"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/condition_title"
             android:textSize="40dp"
             android:textStyle="bold"
             android:gravity="center"
             android:editable="false"
             tools:background="@color/colorPrimaryDark"
-            android:layout_weight="0.07" />
+            android:layout_weight="0.07"
+            android:id="@+id/more_info_title" />
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@android:color/background_light">
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
@@ -44,9 +45,11 @@
                 android:layout_height="wrap_content"
                 android:inputType="textMultiLine"
                 android:ems="10"
-                android:id="@+id/editText2"
-                android:text="dsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"
-                android:textColor="?attr/actionModeSplitBackground" />
+                android:id="@+id/more_info_desc"
+                android:text="Melanoma, also known as malignant melanoma, is a type of cancer that develops from the pigment-containing cells known as melanocytes. Melanomas typically occur in the skin but may rarely occur in the mouth, intestines, or eye. In women they most commonly occur on the legs, while in men they are most common on the back. Sometimes they develop from a mole with concerning changes including an increase in size, irregular edges, change in color, itchiness, or skin breakdown."
+                android:textColor="?attr/actionModeSplitBackground"
+                    android:padding="16dp" />
+
                 <FrameLayout
                     android:layout_width="200dp"
                     android:layout_height="200dp"
@@ -64,7 +67,7 @@
                         app:apsv_model_bg_enabled="true"
                         app:apsv_model_offset="-2dp"
                         app:apsv_preview_bg="#34ffa70b"
-                        app:apsv_preview_colors="@array/devlight"
+                        app:apsv_preview_colors="@medical_express"
                         app:apsv_rounded="true"
                         app:apsv_shadowed="false"
                         app:apsv_text_color="#00000000"/>
@@ -122,7 +125,9 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/Wikipedia"
                         android:gravity="left|center_vertical"
-                        android:paddingLeft="24dp" />
+                        android:paddingLeft="24dp"
+                        android:background="@android:color/background_light"
+                        android:textColor="@android:color/background_dark" />
                 </LinearLayout>
 
             </LinearLayout>
