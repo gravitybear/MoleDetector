@@ -30,6 +30,10 @@ public class DAO {
 
     public static abstract class OnPredictListener {
         public abstract void onPredict(PredictionResult result);
+<<<<<<< Updated upstream
+=======
+        public abstract void onError();
+>>>>>>> Stashed changes
     }
 
     private static class PredictMoleTask extends AsyncTask<Void, Void, JSONObject> {
@@ -51,7 +55,13 @@ public class DAO {
             HttpClient client = new DefaultHttpClient();
             try {
                 HttpResponse res =  client.execute(post);
+<<<<<<< Updated upstream
                 return new JSONObject(EntityUtils.toString(res.getEntity(), "UTF-8"));
+=======
+                if (res.getStatusLine().getStatusCode() == 200) {
+                    return new JSONObject(EntityUtils.toString(res.getEntity(), "UTF-8"));
+                }
+>>>>>>> Stashed changes
             } catch (IOException | JSONException e) {
                 e.printStackTrace();
             } finally {
@@ -63,6 +73,13 @@ public class DAO {
         @Override
         protected void onPostExecute(JSONObject value) {
             super.onPostExecute(value);
+<<<<<<< Updated upstream
+=======
+            if (value == null){
+                onPredicted.onError();
+                return;
+            }
+>>>>>>> Stashed changes
             try {
                 this.onPredicted.onPredict(new PredictionResult(value.getDouble("likelihood"),
                         value.getDouble("asymmetry"), value.getDouble("jagedness"),
