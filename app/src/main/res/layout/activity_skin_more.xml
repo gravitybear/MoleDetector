@@ -56,21 +56,6 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="25dp">
 
-                    <devlight.io.library.ArcProgressStackView
-                        android:id="@+id/apsv_presentation"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        app:apsv_animated="true"
-                        app:apsv_dragged="false"
-                        app:apsv_draw_width="70dp"
-                        app:apsv_leveled="true"
-                        app:apsv_model_bg_enabled="true"
-                        app:apsv_model_offset="-2dp"
-                        app:apsv_preview_bg="#34ffa70b"
-                        app:apsv_preview_colors="@medical_express"
-                        app:apsv_rounded="true"
-                        app:apsv_shadowed="false"
-                        app:apsv_text_color="#00000000"/>
                     <LinearLayout
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
@@ -112,6 +97,22 @@
                             android:textColor="#fff"
                             android:textSize="11sp"/>
                     </LinearLayout>
+
+                    <devlight.io.library.ArcProgressStackView
+                        android:id="@+id/apsv_presentation"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:apsv_animated="true"
+                        app:apsv_dragged="false"
+                        app:apsv_draw_width="70dp"
+                        app:apsv_leveled="true"
+                        app:apsv_model_bg_enabled="true"
+                        app:apsv_model_offset="-2dp"
+                        app:apsv_preview_bg="#34ffa70b"
+                        app:apsv_preview_colors="@medical_express"
+                        app:apsv_rounded="true"
+                        app:apsv_shadowed="false"
+                        app:apsv_text_color="#00000000"/>
                 </FrameLayout>
 
                 <LinearLayout
