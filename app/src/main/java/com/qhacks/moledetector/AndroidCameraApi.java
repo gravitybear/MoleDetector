@@ -6,7 +6,6 @@ package com.qhacks.moledetector;
 
 import android.Manifest;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -200,12 +199,8 @@ public class AndroidCameraApi extends AppCompatActivity {
                         Matrix matrix = new Matrix();
                         matrix.setRotate(90);
                         Bitmap bitmap = BitmapFactory.decodeFile(TMP_FILE);
-                        /*Bitmap resized = Bitmap.createBitmap(bitmap, 0, bitmap.getHeight() / 2 - CROP_HEIGHT / 2,
-                                bitmap.getWidth(), bitmap.getHeight() / 2 + CROP_HEIGHT / 2, matrix, true);*/
-
-                        Bitmap resized = Bitmap.createBitmap(bitmap, 80,200,
+                        Bitmap resized = Bitmap.createBitmap(bitmap, 80, 200,
                                 bitmap.getWidth()-120, bitmap.getHeight()-500, matrix, true);
-
                         FileOutputStream out = new FileOutputStream(FILENAME);
                         resized.compress(Bitmap.CompressFormat.PNG, 100, out);
                         out.flush();
@@ -215,7 +210,6 @@ public class AndroidCameraApi extends AppCompatActivity {
                         e.printStackTrace();
                     } finally {
                         if (image != null) {
-                            image.setCropRect(new Rect(20,80,310,320));
                             image.close();
                         }
                     }
@@ -239,8 +233,6 @@ public class AndroidCameraApi extends AppCompatActivity {
                     super.onCaptureCompleted(session, request, result);
                     Toast.makeText(AndroidCameraApi.this, "Saved:" + file, Toast.LENGTH_SHORT).show();
                     createCameraPreview();
-                    Intent intent = new Intent(AndroidCameraApi.this, SkinInformation.class);
-                    startActivity(intent);
                 }
             };
             cameraDevice.createCaptureSession(outputSurfaces, new CameraCaptureSession.StateCallback() {
