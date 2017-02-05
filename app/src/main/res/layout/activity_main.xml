@@ -14,7 +14,7 @@
         android:layout_height="200dp"
         android:layout_gravity="center">
         <TextView
-            android:text="DermaPal"
+            android:text="Benign"
             android:textSize="40dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
