@@ -31,9 +31,13 @@
             android:screenOrientation="portrait"
         </activity>
 
-        <activity android:name=".ResultsContainer" />
-        <activity android:name=".SkinInformation" />
-        <activity android:name=".LoadingScreen"></activity>
+        <activity android:name=".ResultsContainer"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".SkinInformation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".LoadingScreen">
+            android:screenOrientation="portrait"
+        </activity>
 
     </application>
 
