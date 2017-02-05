@@ -62,24 +62,24 @@
         android:layout_height="4dp"
         android:weightSum="3"
         android:layout_alignParentBottom="true">
-    <View
-        android:id="@+id/info_select"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="match_parent"
-        android:visibility="invisible"/>
-    <View
-        android:id="@+id/info_select2"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="match_parent"
-        android:background="@drawable/selected_tab" />
-    <View
-        android:id="@+id/info_select3"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="match_parent"
-        android:background="@drawable/selected_tab"
-        android:visibility="invisible"/>
+        <View
+            android:id="@+id/info_select"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:visibility="invisible"/>
+        <View
+            android:id="@+id/info_select2"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:background="@drawable/selected_tab" />
+        <View
+            android:id="@+id/info_select3"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:background="@drawable/selected_tab"
+            android:visibility="invisible"/>
     </LinearLayout>
 </RelativeLayout>

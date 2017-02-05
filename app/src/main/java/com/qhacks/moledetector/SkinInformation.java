@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Hashtable;
 
+import devlight.io.library.ArcProgressStackView;
+
 public class SkinInformation extends AppCompatActivity {
 
     public static Bitmap data;
@@ -53,6 +55,14 @@ public class SkinInformation extends AppCompatActivity {
         reason_who.setText(doctor1);
         TextView who_see= (TextView) findViewById(R.id.who_see);
         who_see.setText(doctor2);
+
+        final ArrayList<ArcProgressStackView.Model> models = new ArrayList<>();
+        models.add(new ArcProgressStackView.Model("Jagedness", (int)(result.getJagedness() * 100), R.array.bg, R.array.medical_express));
+        models.add(new ArcProgressStackView.Model("Asymmetry", (int)(result.getAsymmetry() * 100), R.array.bg, R.array.medical_express));
+        models.add(new ArcProgressStackView.Model("Coloring", (int)(result.getColoring() * 100), R.array.bg, R.array.medical_express));
+
+        final ArcProgressStackView arcProgressStackView = (ArcProgressStackView) findViewById(R.id.arc);
+        arcProgressStackView.setModels(models);
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {

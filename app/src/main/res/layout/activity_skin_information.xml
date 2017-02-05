@@ -60,7 +60,7 @@
         android:background="@drawable/select_rectangle">
     </View>
 
-    <LinearLayout
+    <ScrollView
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:paddingTop="14dp"
@@ -72,14 +72,39 @@
 
         <LinearLayout
             android:orientation="vertical"
-            android:weightSum="3"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <devlight.io.library.ArcProgressStackView
+                android:id="@+id/arc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                app:apsv_rounded="true"
+                app:apsv_shadowed="true"
+                app:apsv_animated="true"
+                app:apsv_dragged="false"
+                app:apsv_leveled="true"
+                app:apsv_typeface="fonts/agency.ttf"
+                app:apsv_text_color="#fff"
+                app:apsv_shadow_distance="5dp"
+                app:apsv_shadow_angle="90"
+                app:apsv_shadow_radius="10dp"
+                app:apsv_shadow_color="#000"
+                app:apsv_animation_duration="1000"
+                app:apsv_interpolator="@android:anim/bounce_interpolator"
+                app:apsv_draw_width="75%"
+                app:apsv_model_offset="5dp"
+                app:apsv_model_bg_enabled="true"
+                app:apsv_start_angle="270"
+                app:apsv_sweep_angle="360"
+                app:apsv_indicator_orientation="vertical"
+                app:apsv_preview_colors="@array/default_preview"
+                app:apsv_preview_bg="#ccc"/>
+
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:text="Since our results are not 100% accurate, you should try to see a physician every year for a professional skin exam"
                 android:textStyle="bold"
@@ -89,8 +114,7 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_height="wrap_content"
                 android:paddingTop="20dp"
                 android:gravity="center_horizontal"
                 android:text="Most skin related abnormalities are caused by exposure to ultra-violet sun rays"
@@ -131,7 +155,7 @@
         </LinearLayout>
 
 
-    </LinearLayout>
+    </ScrollView>
 
 
 </LinearLayout>
