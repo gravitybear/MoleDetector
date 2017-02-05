@@ -196,9 +196,7 @@ public class AndroidCameraApi extends AppCompatActivity {
                         matrix.setRotate(90);
                         Bitmap bitmap = BitmapFactory.decodeFile(TMP_FILE);
                         Bitmap resized = Bitmap.createBitmap(bitmap, 80, 200,
-
                                 bitmap.getWidth() - 120, bitmap.getHeight() - 500, matrix, true);
-
                         FileOutputStream out = new FileOutputStream(FILENAME);
                         resized.compress(Bitmap.CompressFormat.PNG, 100, out);
                         out.flush();
@@ -208,6 +206,11 @@ public class AndroidCameraApi extends AppCompatActivity {
                                 // TODO: Transition to appropriate results screen
                                 // TODO: Remove loading screen
                                 Log.d("CameraAPI", String.valueOf(result.getLikelihood()));
+                            }
+
+                            @Override
+                            public void onError() {
+                                Log.d("CameraAPI", "ERROR");
                             }
                         });
                     } catch (FileNotFoundException e) {
