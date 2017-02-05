@@ -46,7 +46,8 @@
         android:textColor="@color/white"
         android:gravity="center"
         android:layout_gravity="bottom"
-        android:paddingBottom="34dp"/>
+        android:paddingBottom="34dp"
+        android:textSize="18sp" />
 
 
 </android.support.design.widget.CoordinatorLayout>
